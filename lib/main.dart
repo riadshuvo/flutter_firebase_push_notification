@@ -51,9 +51,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  late final FirebaseMessaging _firebaseMessaging;
+  String _message = '';
+
+  _registerOnFirebase() {
+    FirebaseMessaging.instance.subscribeToTopic('all');
+    FirebaseMessaging.instance.getToken().then((token) => print(token));
+  }
+
   @override
   void initState() {
     super.initState();
+
+    ///Get FDM token
+    _registerOnFirebase();
 
     ///Gives you the message on which user taps
     ///and it opens when the app is closed or terminated state
